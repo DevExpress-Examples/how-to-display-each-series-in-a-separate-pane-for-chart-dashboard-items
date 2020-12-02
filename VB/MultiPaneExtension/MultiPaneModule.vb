@@ -37,8 +37,8 @@ Namespace MultiPaneExtension
 			Detach()
 			Me.dashboardControl = dashboardControl
 			Me.dashboardControl.CalculateHiddenTotals = True
-			AddHandler Me.dashboardControl.DashboardItemControlUpdated, AddressOf DashboardItemControlUpdated
-			AddHandler Me.dashboardControl.CustomExport, AddressOf CustomExport
+			AddHandler dashboardControl.DashboardItemControlUpdated, AddressOf DashboardItemControlUpdated
+			AddHandler dashboardControl.CustomExport, AddressOf CustomExport
 
 			If dashboardDesigner IsNot Nothing Then
 				AddButtonToRibbon()
@@ -58,8 +58,8 @@ Namespace MultiPaneExtension
 			If dashboardDesigner IsNot Nothing Then
 				RemoveButtonFromRibbon()
 			End If
-			RemoveHandler Me.dashboardControl.DashboardItemControlUpdated, AddressOf DashboardItemControlUpdated
-			RemoveHandler Me.dashboardControl.CustomExport, AddressOf CustomExport
+			RemoveHandler dashboardControl.DashboardItemControlUpdated, AddressOf DashboardItemControlUpdated
+			RemoveHandler dashboardControl.CustomExport, AddressOf CustomExport
 			If dashboardDesigner IsNot Nothing Then
 				RemoveButtonFromRibbon()
 				RemoveHandler dashboardDesigner.DashboardItemSelected, AddressOf DashboardDesigner_DashboardItemSelected
@@ -97,26 +97,43 @@ Namespace MultiPaneExtension
 		End Sub
 
 		Private Sub CustomizeDiagram(ByVal diagram As XYDiagram, ByVal series As SeriesCollection, ByVal settings As MultiPaneSettings)
-            If settings.MultiPaneEnabled Then
-                diagram.PaneLayout.AutoLayoutMode = If(settings.UseGridLayout, PaneAutoLayoutMode.Grid, PaneAutoLayoutMode.Linear)
-                diagram.RuntimePaneCollapse = settings.AllowPaneCollapsing
-                Dim seriesWithPoints As List(Of Series) = series.Cast(Of Series)().Where(Function(s) s.Points.Any()).ToList()
-                For i As Integer = 0 To seriesWithPoints.Count - 1
-                    If i <> 0 Then
-                        diagram.Panes.Add(New XYDiagramPane())
-                    End If
-                    Dim pane As XYDiagramPane = diagram.Panes(i)
-                    TryCast(seriesWithPoints(i).View, XYDiagramSeriesViewBase).Pane = pane
-                    If settings.ShowPaneTitles Then
-                        pane.Title.Visibility = DevExpress.Utils.DefaultBoolean.True
-                        pane.Title.Text = seriesWithPoints(i).Name
-                    Else
-                        pane.Title.Visibility = DevExpress.Utils.DefaultBoolean.False
-                    End If
-                Next i
-            End If
+			If settings.MultiPaneEnabled Then
+				diagram.PaneLayout.AutoLayoutMode = If(settings.UseGridLayout, PaneAutoLayoutMode.Grid, PaneAutoLayoutMode.Linear)
+				diagram.RuntimePaneCollapse = settings.AllowPaneCollapsing
+				Dim seriesWithPoints As List(Of Series) = series.Cast(Of Series)().Where(Function(s) s.Points.Any()).ToList()
+				For i As Integer = 0 To seriesWithPoints.Count - 1
+					If i <> 0 Then
+						diagram.Panes.Add(New XYDiagramPane())
+					End If
+					Dim pane As XYDiagramPane = diagram.Panes(i)
+					TryCast(seriesWithPoints(i).View, XYDiagramSeriesViewBase).Pane = pane
+					If settings.ShowPaneTitles Then
+						pane.Title.Visibility = DevExpress.Utils.DefaultBoolean.True
+						pane.Title.Text = seriesWithPoints(i).Name
+					Else
+						pane.Title.Visibility = DevExpress.Utils.DefaultBoolean.False
+					End If
+				Next i
+				'foreach (XYDiagramPane pane in diagram.Panes)
+				'{
+				'    if (diagram.Rotated)
+				'    {
+				'        if (pane == diagram.Panes[0])
+				'            diagram.AxisX.SetVisibilityInPane(true, pane);
+				'        else
+				'            diagram.AxisX.SetVisibilityInPane(false, pane);
+				'    }
+				'    else //not rotated
+				'    {
+				'        if (pane == diagram.Panes[diagram.Panes.Count - 1])
+				'            diagram.AxisX.SetVisibilityInPane(true, pane);
+				'        else
+				'            diagram.AxisX.SetVisibilityInPane(false, pane);
+				'    }
+				'}
+			End If
 
-        End Sub
+		End Sub
 
 		#End Region
 
@@ -128,13 +145,23 @@ Namespace MultiPaneExtension
 			If TypeOf dashboardDesigner.SelectedDashboardItem Is ChartDashboardItem Then
 				Dim chartItem As ChartDashboardItem = TryCast(dashboardDesigner.SelectedDashboardItem, ChartDashboardItem)
 				If chartItem.Panes.Count>1 Then
-                    allowCollapsingBarItem.Checked = False
-                    showTitlesBarItem.Checked = allowCollapsingBarItem.Checked
-                    enableBarItem.Checked = showTitlesBarItem.Checked
-                    layoutModeBarItem.Enabled = False
-                    allowCollapsingBarItem.Enabled = layoutModeBarItem.Enabled
-                    showTitlesBarItem.Enabled = allowCollapsingBarItem.Enabled
-                    enableBarItem.Enabled = showTitlesBarItem.Enabled
+'INSTANT VB WARNING: An assignment within expression was extracted from the following statement:
+'ORIGINAL LINE: enableBarItem.Checked = showTitlesBarItem.Checked = allowCollapsingBarItem.Checked = false;
+					allowCollapsingBarItem.Checked = False
+'INSTANT VB WARNING: An assignment within expression was extracted from the following statement:
+'ORIGINAL LINE: enableBarItem.Checked = showTitlesBarItem.Checked = allowCollapsingBarItem.Checked
+					showTitlesBarItem.Checked = allowCollapsingBarItem.Checked
+					enableBarItem.Checked = showTitlesBarItem.Checked
+'INSTANT VB WARNING: An assignment within expression was extracted from the following statement:
+'ORIGINAL LINE: enableBarItem.Enabled = showTitlesBarItem.Enabled = allowCollapsingBarItem.Enabled = layoutModeBarItem.Enabled = false;
+					layoutModeBarItem.Enabled = False
+'INSTANT VB WARNING: An assignment within expression was extracted from the following statement:
+'ORIGINAL LINE: enableBarItem.Enabled = showTitlesBarItem.Enabled = allowCollapsingBarItem.Enabled = layoutModeBarItem.Enabled
+					allowCollapsingBarItem.Enabled = layoutModeBarItem.Enabled
+'INSTANT VB WARNING: An assignment within expression was extracted from the following statement:
+'ORIGINAL LINE: enableBarItem.Enabled = showTitlesBarItem.Enabled = allowCollapsingBarItem.Enabled
+					showTitlesBarItem.Enabled = allowCollapsingBarItem.Enabled
+					enableBarItem.Enabled = showTitlesBarItem.Enabled
 					Return
 				End If
 				Dim settings As MultiPaneSettings = MultiPaneSettings.FromJson(chartItem.CustomProperties(customPropertyName))
@@ -163,7 +190,7 @@ Namespace MultiPaneExtension
 		Private Function CreateEnableBarItem() As BarCheckItem
 			Dim barItem As New BarCheckItem()
 			barItem.Caption = barButtonEnableCaption
-			barItem.ImageOptions.SvgImage = My.Resources.AddChartPaneButton
+			barItem.ImageOptions.SvgImage = Global.MultiPaneExtension.Properties.Resources.AddChartPaneButton
 			barItem.RibbonStyle = RibbonItemStyles.All
 			AddHandler barItem.ItemClick, AddressOf OnEnableClick
 			Return barItem
@@ -180,7 +207,7 @@ Namespace MultiPaneExtension
 		Private Function CreateShowTitlesBarItem() As BarCheckItem
 			Dim barItem As New BarCheckItem()
 			barItem.Caption = barButtonShowTitlesCaption
-			barItem.ImageOptions.SvgImage = My.Resources.ShowPaneTitlesButton
+			barItem.ImageOptions.SvgImage = Global.MultiPaneExtension.Properties.Resources.ShowPaneTitlesButton
 
 
 			AddHandler barItem.ItemClick, AddressOf OnShowTitlesClick
@@ -200,7 +227,7 @@ Namespace MultiPaneExtension
 		Private Function CreateAllowCollapsingBarItem() As BarCheckItem
 			Dim barItem As New BarCheckItem()
 			barItem.Caption = barButtonAllowCollapsingCaption
-			barItem.ImageOptions.SvgImage = My.Resources.CollapsePaneButton
+			barItem.ImageOptions.SvgImage = Global.MultiPaneExtension.Properties.Resources.CollapsePaneButton
 
 			AddHandler barItem.ItemClick, AddressOf OnAllowCollapsingClick
 			barItem.RibbonStyle = RibbonItemStyles.All
@@ -219,7 +246,7 @@ Namespace MultiPaneExtension
 		Private Function CreateLayoutModeBarItem() As BarListItem
 			Dim barItem As New BarListItem()
 			barItem.Caption = barListLayoutCaption
-			barItem.ImageOptions.SvgImage = My.Resources.LayoutModeButton
+			barItem.ImageOptions.SvgImage = Global.MultiPaneExtension.Properties.Resources.LayoutModeButton
 			barItem.ShowChecks = True
 			barItem.Strings.Add("Grid")
 			barItem.Strings.Add("Linear")
@@ -238,7 +265,19 @@ Namespace MultiPaneExtension
 			UpdateBarItems()
 		End Sub
 
-        Private Sub AddButtonToRibbon()
+		'void OnAllowCollapsingClick(object sender, ItemClickEventArgs e)
+		'{
+		'    ChartDashboardItem dashboardItem = dashboardDesigner.SelectedDashboardItem as ChartDashboardItem;
+		'    MultiPaneSettings settings = MultiPaneSettings.FromJson(dashboardItem.CustomProperties[customPropertyName]);
+		'    settings.AllowPaneCollapsing = !settings.AllowPaneCollapsing;
+		'    string status = settings.AllowPaneCollapsing == true ? "enabled" : "disabled";
+		'    CustomPropertyHistoryItem historyItem = new CustomPropertyHistoryItem(dashboardItem, customPropertyName, settings.ToJson(), $"Pane Collapsing for {dashboardItem.ComponentName} is {status}");
+		'    dashboardDesigner.AddToHistory(historyItem);
+		'    UpdateBarItems();
+		'}
+
+
+		Private Sub AddButtonToRibbon()
 			Dim ribbon As RibbonControl = dashboardDesigner.Ribbon
 			Dim page As RibbonPage = ribbon.GetDashboardRibbonPage(DashboardBarItemCategory.ChartTools, DashboardRibbonPage.Design)
 			Dim group As RibbonPageGroup = page.GetGroupByName(ribonPageGroupName)
