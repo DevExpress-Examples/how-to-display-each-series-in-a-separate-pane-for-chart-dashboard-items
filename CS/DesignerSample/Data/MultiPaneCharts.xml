@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <ExtractFileDataSource ComponentName="dashboardExtractDataSource1" Name="Extract Data Source 1">
+      <FileName>Data/CustomerReports.dat</FileName>
+      <ExtractSourceDataMember>CustomerReports</ExtractSourceDataMember>
+      <ExtractSourceFilter></ExtractSourceFilter>
+      <NumberOfRows>-1</NumberOfRows>
+      <Parameters />
+      <SavedSchema>
+        <Column>
+          <Name>ProductName</Name>
+          <Type>System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>CompanyName</Name>
+          <Type>System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>OrderDate</Name>
+          <Type>System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>ProductAmount</Name>
+          <Type>System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+      </SavedSchema>
+    </ExtractFileDataSource>
+  </DataSources>
+  <Items>
+    <Chart ComponentName="chartDashboardItem1" Name="Chart 1" DataSource="dashboardExtractDataSource1">
+      <CustomProperties>
+        <MultiPaneSettings>{"MultiPaneEnabled":true,"ShowPaneTitles":true,"AllowPaneCollapsing":true}</MultiPaneSettings>
+      </CustomProperties>
+      <DataItems>
+        <Measure DataMember="ProductAmount" DefaultId="DataItem0" />
+        <Dimension DataMember="OrderDate" DateTimeGroupInterval="QuarterYear" DefaultId="DataItem2" />
+        <Dimension DataMember="CompanyName" TopNEnabled="true" TopNCount="4" TopNMeasure="DataItem0" DefaultId="DataItem1" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem1" />
+      </SeriesDimensions>
+      <Arguments>
+        <Argument DefaultId="DataItem2" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple>
+              <Value DefaultId="DataItem0" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem3" Name="Chart 1" DataSource="dashboardExtractDataSource1">
+      <CustomProperties>
+        <MultiPaneSettings>{"MultiPaneEnabled":true,"ShowPaneTitles":true,"AllowPaneCollapsing":true,"UseGridLayout":false}</MultiPaneSettings>
+      </CustomProperties>
+      <DataItems>
+        <Measure DataMember="ProductAmount" DefaultId="DataItem0" />
+        <Dimension DataMember="OrderDate" DateTimeGroupInterval="QuarterYear" DefaultId="DataItem2" />
+        <Dimension DataMember="CompanyName" TopNEnabled="true" TopNCount="4" TopNMeasure="DataItem0" DefaultId="DataItem1" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem1" />
+      </SeriesDimensions>
+      <Arguments>
+        <Argument DefaultId="DataItem2" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple>
+              <Value DefaultId="DataItem0" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Weight="100">
+      <LayoutItem DashboardItem="chartDashboardItem1" Weight="49.867374005305038" />
+      <LayoutItem DashboardItem="chartDashboardItem3" Weight="50.132625994694962" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
