@@ -1,7 +1,7 @@
 _files to look at:_
 
 * [Form1.cs](./CS/DesignerSample/Form1.cs) (VB: [Form1.vb](./VB/DesignerSample/Form1.vb))
-* [MultiPaneExtension.cs](./CS/MultiPaneExtension/MultiPaneExtension.cs) (VB: [MultiPaneExtension.vb](./VB/MultiPaneExtension/MultiPaneExtension.vb)
+* [MultiPaneExtension.cs](./CS/MultiPaneExtension/MultiPaneModule.cs) (VB: [MultiPaneExtension.vb](./VB/MultiPaneExtension/MultiPaneModule.vb))
 
 # How to display each series in a separate pane for Chart Dashboard Items  
 This example creates a WinForms Dashboard extension module that allows users to display each series in a separate pane for Chart Dashboard Items.
