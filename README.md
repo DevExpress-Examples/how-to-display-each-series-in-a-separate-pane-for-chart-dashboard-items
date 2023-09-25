@@ -4,7 +4,7 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
 
-# How to Display Each Series in a Separate Pane for Chart Dashboard Items  
+# Dashboard for winForms - How to Display Each Series in a Separate Pane for Chart Dashboard Items  
 This example creates a WinForms Dashboard extension module that allows users to display each series in a separate pane for Chart Dashboard Items.
 
 ![](images/multi-panes.png)
