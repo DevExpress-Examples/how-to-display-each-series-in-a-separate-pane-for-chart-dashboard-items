@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +26,12 @@ namespace MultiPaneExtension
         {
             if (string.IsNullOrEmpty(json))
                 return new MultiPaneSettings();
-            return JsonConvert.DeserializeObject<MultiPaneSettings>(json) as MultiPaneSettings;
+            return JsonSerializer.Deserialize<MultiPaneSettings>(json) as MultiPaneSettings;
         }
 
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this);
+            return JsonSerializer.Serialize(this);
         }
 
 

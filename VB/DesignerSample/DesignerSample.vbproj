@@ -7,10 +7,12 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0B92C5D0-3B78-485A-A570-2FDF89F15BB2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>DesignerSample</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
