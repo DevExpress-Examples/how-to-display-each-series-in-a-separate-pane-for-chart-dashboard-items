@@ -66,7 +66,7 @@ The **MultiPaneSettings** class describes the model of custom settings used in t
 * [Access to Underlying Controls](https://docs.devexpress.com/Dashboard/401095/winforms-designer/access-to-underlying-controls)
 * [ChartControl Panes](https://docs.devexpress.com/WindowsForms/5879/controls-and-libraries/chart-control/chart-elements/diagram/panes)
 <!-- feedback -->
-## Does this example address your development requirements/objectives?
+## Does This Example Address Your Development Requirements/Objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=winforms-dashboard-display-each-series-in-separate-pane-for-chart-items&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=winforms-dashboard-display-each-series-in-separate-pane-for-chart-items&~~~was_helpful=no)
 
